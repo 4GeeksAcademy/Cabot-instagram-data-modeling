@@ -24,9 +24,9 @@ class Comment(Base):
     # Here we define columns for the table address.
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
-    comment_text = Column(String(250), ForeignKey('user.id'))
-    author_id = Column(Integer, ForeignKey('user.id'))
-    post_id = Column(Integer, ForeignKey('post.id'))
+    comment_text = Column(String(250), ForeignKey('User.id'))
+    author_id = Column(Integer, ForeignKey('User.id'))
+    post_id = Column(Integer, ForeignKey('Post.id'))
     user = relationship(User)
 
     def to_dict(self):
@@ -35,21 +35,21 @@ class Comment(Base):
 class Follower(Base):
     __tablename__ = 'Follower'
     id = Column(Integer, primary_key=True)
-    user_from_id = Column(Integer, ForeignKey('user.id'))
-    user_to_id = Column(Integer, ForeignKey('user.id'))
+    user_from_id = Column(Integer, ForeignKey('User.id'))
+    user_to_id = Column(Integer, ForeignKey('User.id'))
     user = relationship(User)
     
 class Post(Base):
     __tablename__ = 'Post'
     id = Column(Integer, primary_key=True)    
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('User.id'))
 
 class Media(Base):
     __tablename__ = "Media"
     id = Column(Integer, primary_key=True)
     type= Column(Enum)
     url= Column(String(250))
-    post_id = Column(Integer, ForeignKey('post.id'))
+    post_id = Column(Integer, ForeignKey('Post.id'))
     post = relationship(Post)
 
 
